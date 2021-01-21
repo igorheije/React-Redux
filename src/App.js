@@ -1,15 +1,21 @@
 import React from 'react'
-import { useDispatch,  } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { somar } from './store/contador'
-import {  login } from './store/login'
+import {  autoLogin, login } from './store/login'
 
 
 const App = () => {
-  // const data = useSelector(state=>state.login)
+  const {data} = useSelector(state=>state.login.user)
   const dispatch = useDispatch()
 
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
+
+  console.log(data);
+
+  React.useEffect(() =>{
+    dispatch(autoLogin())
+  },[dispatch])
 
   function handleSubmit(e){
     e.preventDefault()
@@ -27,6 +33,7 @@ const App = () => {
       <button>Enviar</button>
       {/* <h1>{data?.token}</h1> */}
     </form>
+    <p>Email: {data?.email}</p>
     <button onClick={()=> dispatch(somar(5))}>SOMAR</button>
     </div>
   )
