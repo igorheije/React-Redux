@@ -1,4 +1,4 @@
-function getLocalStorage(key, initial){
+const getLocalStorage=(key, initial)=>{
     try{
         return JSON.parse(window.localStorage.getItem(key))
     }catch{
